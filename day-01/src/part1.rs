@@ -16,7 +16,7 @@ pub fn process(_input: &str) -> String {
             .to_digit(10)
             .unwrap();
 
-        dbg!(first_digit, last_digit);
+        // dbg!(first_digit, last_digit);
         sum += first_digit * 10 + last_digit
     }
     sum.to_string()
