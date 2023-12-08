@@ -25,7 +25,7 @@ impl Range {
     }
 }
 
-fn process_map(map: &Vec<Range>, value: u64) -> u64 {
+fn process_map(map: &[Range], value: u64) -> u64 {
     let found = map.iter().find_map(|r| r.process_val(value));
 
     match found {
