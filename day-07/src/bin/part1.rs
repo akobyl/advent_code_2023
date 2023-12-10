@@ -1,8 +1,8 @@
-use day_06::part2::process;
+use day_07::part1::process;
 
 #[tracing::instrument]
 fn main() {
-    let file = include_str!("../../input2.txt");
+    let file = include_str!("../../input1.txt");
 
     let result = process(file);
     println!("{}", result);

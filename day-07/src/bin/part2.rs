@@ -1,4 +1,4 @@
-use day_06::part2::process;
+use day_07::part2::process;
 
 #[tracing::instrument]
 fn main() {
