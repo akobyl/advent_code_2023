@@ -46,7 +46,7 @@ pub fn process(input: &str) -> String {
     let instructions: Vec<_> = input.lines().next().unwrap().chars().collect();
 
     let mut tree: ArenaTree = ArenaTree::default();
-    for line in input.lines().skip(2) {
+    input.lines().skip(2).for_each(|line| {
         let name = &line[0..3];
         let left = &line[7..10];
         let right = &line[12..15];
@@ -54,7 +54,7 @@ pub fn process(input: &str) -> String {
         let node = tree.node(name);
         tree.arena[node].right = Some(tree.node(right));
         tree.arena[node].left = Some(tree.node(left));
-    }
+    });
 
     let mut node = tree.node("AAA");
     let target_node = tree.node("ZZZ");
