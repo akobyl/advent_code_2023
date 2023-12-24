@@ -17,18 +17,13 @@ fn get_touching_pipes(map: &[Vec<char>], y: usize, x: usize) -> Vec<(usize, usiz
     smap.insert((0, -1), "-FL"); // Left one
     smap.insert((1, 0), "|LJ"); // Down one
 
-    let x_0 = x as i32;
-    let y_0 = y as i32;
-    let x_max = map[0].len() as i32;
-    let y_max = map.len() as i32;
-
     smap.iter()
         .filter_map(|(&k, &v)| {
-            let (yd, xd) = (y_0 + k.0, x_0 + k.1);
+            let (yd, xd) = (y as i32 + k.0, x as i32 + k.1);
             if yd >= 0
-                && yd < y_max
+                && yd < map.len() as i32
                 && xd >= 0
-                && xd < x_max
+                && xd < map[0].len() as i32
                 && v.contains(map[yd as usize][xd as usize])
             {
                 Some((yd as usize, xd as usize))
