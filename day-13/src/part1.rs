@@ -56,8 +56,7 @@ fn find_mirror(input: Vec<Vec<char>>) -> Mirror {
     if let Some(i) = find_split(&rotated) {
         return Mirror::Vertical(i);
     }
-    assert!(false, "No mirror found");
-    return Mirror::Vertical(0);
+    panic!("No mirror found");
 }
 
 pub fn process(input: &str) -> String {
