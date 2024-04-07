@@ -25,14 +25,23 @@ fn parse_platform(input: &str) -> Vec<Vec<Thing>> {
         .collect()
 }
 
-fn rotate_platform(platform: &mut Vec<Vec<Thing>>) {
+fn rotate_platform(platform: &mut Vec<Vec<Thing>>, clockwise: bool) {
     let cols = platform[0].len();
 
-    let rotated: Vec<Vec<_>> = (0..cols)
-        //.rev()
-        .map(|i| platform.iter().map(|row| row[i]).collect())
-        .collect();
+    let mut rotated: Vec<Vec<_>> = if clockwise {
+        (0..cols)
+            .map(|i| platform.iter().map(|row| row[i]).collect())
+            .collect()
+    } else {
+        (0..cols)
+            .rev()
+            .map(|i| platform.iter().map(|row| row[i]).collect())
+            .collect()
+    };
 
+    if !clockwise {
+        rotated.reverse();
+    }
     *platform = rotated;
 }
 
@@ -67,15 +76,13 @@ fn tilt_platform_horizontal(platform: &mut [Vec<Thing>], left: bool) {
 }
 
 fn tilt_platform_vertical(platform: &mut Vec<Vec<Thing>>, up: bool) {
-    rotate_platform(platform);
+    rotate_platform(platform, true);
     if up {
         tilt_platform_horizontal(platform, true);
     } else {
         tilt_platform_horizontal(platform, false);
     }
-    rotate_platform(platform);
-    rotate_platform(platform);
-    rotate_platform(platform);
+    rotate_platform(platform, false);
 }
 
 /// tilt platform in any direction
