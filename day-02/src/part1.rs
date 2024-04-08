@@ -1,5 +1,5 @@
 #[derive(Debug, PartialEq)]
-struct RGB {
+struct Rgb {
     red: u8,
     green: u8,
     blue: u8,
@@ -16,14 +16,14 @@ fn parse_game_id(line: &str) -> u32 {
         .unwrap()
 }
 
-fn parse_color_group(group: &str) -> RGB {
+fn parse_color_group(group: &str) -> Rgb {
     group
         .split(',')
         .map(|s| s.trim())
         .map(|s| s.split(' '))
         .map(|mut s| (s.next().unwrap(), s.next().unwrap()))
         .fold(
-            RGB {
+            Rgb {
                 red: 0,
                 green: 0,
                 blue: 0,
@@ -47,7 +47,7 @@ pub fn process(_input: &str) -> String {
         let mut valid = true;
         let game_id = parse_game_id(line);
         let colors = line.split_once(':').unwrap().1.trim();
-        let rgbs: Vec<RGB> = colors
+        let rgbs: Vec<Rgb> = colors
             .split(';')
             .map(|s| s.trim())
             .map(parse_color_group)
@@ -95,7 +95,7 @@ mod tests {
     fn test_parse_color_group() {
         assert_eq!(
             parse_color_group("1 blue, 2 green"),
-            RGB {
+            Rgb {
                 red: 0,
                 green: 2,
                 blue: 1
@@ -104,7 +104,7 @@ mod tests {
 
         assert_eq!(
             parse_color_group("3 green, 4 blue, 1 red"),
-            RGB {
+            Rgb {
                 red: 1,
                 green: 3,
                 blue: 4
@@ -113,7 +113,7 @@ mod tests {
 
         assert_eq!(
             parse_color_group(" 3 green, 15 blue, 14 red"),
-            RGB {
+            Rgb {
                 red: 14,
                 green: 3,
                 blue: 15

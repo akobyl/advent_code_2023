@@ -151,6 +151,7 @@ pub fn process(input: &str) -> String {
     load.to_string()
 }
 
+#[allow(dead_code)]
 fn print_platform(platform: &Vec<Vec<Thing>>) {
     for row in platform {
         for &thing in row {

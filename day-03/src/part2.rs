@@ -19,7 +19,7 @@ struct Number {
     gear: GearOrNot,
 }
 
-fn is_geared(grid: &Vec<Vec<char>>, number: &mut Number) {
+fn is_geared(grid: &[Vec<char>], number: &mut Number) {
     let size = number.number.to_string().len() as i32;
 
     for i in number.y - 1..=number.y + 1 {
@@ -106,10 +106,7 @@ pub fn process(_input: &str) -> String {
             GearOrNot::GearLoc(x, y) => (x, y),
             _ => (0, 0),
         };
-        gearmap
-            .entry(Gear { x, y })
-            .or_insert_with(Vec::new)
-            .push(n.number);
+        gearmap.entry(Gear { x, y }).or_default().push(n.number);
     });
 
     // Filter only gears with 2 numbers

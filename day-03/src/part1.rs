@@ -3,10 +3,9 @@ struct Number {
     x: i32,
     y: i32,
     tagged: bool,
-    symbol: char,
 }
 
-fn get_surrounding_squares_tag(grid: &Vec<Vec<char>>, number: &mut Number) {
+fn get_surrounding_squares_tag(grid: &[Vec<char>], number: &mut Number) {
     let size = number.number.to_string().len() as i32;
     let symbols = ['*', '-', '+', '#', '&', '$', '=', '%', '@', '/'];
 
@@ -60,7 +59,6 @@ pub fn process(_input: &str) -> String {
                     x: j as i32,
                     y: i as i32,
                     tagged: false,
-                    symbol: ' ',
                 })
             }
         }

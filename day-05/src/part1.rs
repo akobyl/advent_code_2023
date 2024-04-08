@@ -34,7 +34,7 @@ fn process_map(map: &[Range], value: u64) -> u64 {
     }
 }
 
-fn generate_map(map_str: &Vec<&str>) -> Vec<Range> {
+fn generate_map(map_str: &[&str]) -> Vec<Range> {
     let mut map: Vec<Range> = Vec::new();
 
     for line in map_str.iter().skip(1) {
@@ -79,7 +79,7 @@ pub fn process(input: &str) -> String {
         maps.push(current_map);
     }
 
-    let generated_maps: Vec<Vec<Range>> = maps.iter().map(generate_map).collect();
+    let generated_maps: Vec<Vec<Range>> = maps.iter().map(|m| generate_map(m)).collect();
 
     let location: u64 = seeds
         .iter()

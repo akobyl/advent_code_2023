@@ -1,24 +1,24 @@
 #[derive(Debug, PartialEq)]
-struct RGB {
+struct Rgb {
     red: u32,
     green: u32,
     blue: u32,
 }
 
-impl RGB {
+impl Rgb {
     fn power(&self) -> u32 {
         self.red * self.green * self.blue
     }
 }
 
-fn parse_color_group(group: &str) -> RGB {
+fn parse_color_group(group: &str) -> Rgb {
     group
         .split(',')
         .map(|s| s.trim())
         .map(|s| s.split(' '))
         .map(|mut s| (s.next().unwrap(), s.next().unwrap()))
         .fold(
-            RGB {
+            Rgb {
                 red: 0,
                 green: 0,
                 blue: 0,
@@ -40,19 +40,19 @@ pub fn process(_input: &str) -> String {
     let mut output = 0;
     for line in _input.split('\n') {
         let colors = line.split_once(':').unwrap().1.trim();
-        let rgbs: Vec<RGB> = colors
+        let rgbs: Vec<Rgb> = colors
             .split(';')
             .map(|s| s.trim())
             .map(parse_color_group)
             .collect();
 
         let peak = rgbs.iter().fold(
-            RGB {
+            Rgb {
                 red: 0,
                 green: 0,
                 blue: 0,
             },
-            |max_rgb, rgb| RGB {
+            |max_rgb, rgb| Rgb {
                 red: max_rgb.red.max(rgb.red),
                 green: max_rgb.green.max(rgb.green),
                 blue: max_rgb.blue.max(rgb.blue),
@@ -82,7 +82,7 @@ mod tests {
     fn test_parse_color_group() {
         assert_eq!(
             parse_color_group("1 blue, 2 green"),
-            RGB {
+            Rgb {
                 red: 0,
                 green: 2,
                 blue: 1
@@ -91,7 +91,7 @@ mod tests {
 
         assert_eq!(
             parse_color_group("3 green, 4 blue, 1 red"),
-            RGB {
+            Rgb {
                 red: 1,
                 green: 3,
                 blue: 4
@@ -100,7 +100,7 @@ mod tests {
 
         assert_eq!(
             parse_color_group(" 3 green, 15 blue, 14 red"),
-            RGB {
+            Rgb {
                 red: 14,
                 green: 3,
                 blue: 15
@@ -111,7 +111,7 @@ mod tests {
     #[test]
     fn test_power() {
         assert_eq!(
-            RGB {
+            Rgb {
                 red: 0,
                 green: 2,
                 blue: 1
@@ -120,7 +120,7 @@ mod tests {
             0
         );
         assert_eq!(
-            RGB {
+            Rgb {
                 red: 4,
                 green: 2,
                 blue: 6

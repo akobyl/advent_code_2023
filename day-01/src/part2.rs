@@ -46,7 +46,7 @@ fn process_line(line: &str) -> u32 {
 
 pub fn process(_input: &str) -> String {
     let mut sum = 0;
-    for line in _input.split("\n") {
+    for line in _input.split('\n') {
         sum += process_line(line);
     }
 
