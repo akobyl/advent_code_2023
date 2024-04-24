@@ -1,4 +1,3 @@
-#![allow(dead_code, unused_imports, unused_variables)]
 use std::collections::HashSet;
 use std::collections::VecDeque;
 
@@ -17,25 +16,6 @@ struct Tile {
     direction: Direction,
 }
 
-#[derive(Debug)]
-struct Beam {
-    beam: Vec<Tile>,
-}
-
-impl Beam {
-    fn new(beam: Vec<Tile>) -> Self {
-        Self { beam }
-    }
-
-    fn get_points(&self) -> HashSet<(i32, i32)> {
-        self.beam.iter().map(|tile| (tile.x, tile.y)).collect()
-    }
-
-    fn is_overlap(&self, new_point: &Tile) -> bool {
-        self.beam.iter().any(|tile| tile == new_point)
-    }
-}
-
 fn is_next_in_grid(point: (i32, i32), direction: Direction, grid_size: (usize, usize)) -> bool {
     match direction {
         Direction::Up => point.1 > 0,
@@ -43,10 +23,6 @@ fn is_next_in_grid(point: (i32, i32), direction: Direction, grid_size: (usize, u
         Direction::Left => point.0 > 0,
         Direction::Right => point.0 < grid_size.1 as i32 - 1,
     }
-}
-
-fn is_in_grid(point: (usize, usize), grid_size: (usize, usize)) -> bool {
-    point.0 < grid_size.1 && point.1 < grid_size.0
 }
 
 fn calculate_beam(
